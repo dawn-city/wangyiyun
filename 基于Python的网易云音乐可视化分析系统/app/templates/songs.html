@@ -1,0 +1,49 @@
+{%extends 'base.html'%}
+
+{%block desc%}
+<h1>歌曲分析</h1>
+<p>本系统爬取网易云音乐热门歌单1286个，根据热门歌单爬取了93904首歌曲，并取了每首歌曲的热门评论共844869条</p>
+<br>
+<h3>歌曲数据统计</h3>
+<p>歌曲总数93904首，其中原唱歌曲84190首，翻唱歌曲9714首</p>
+<div id="song_data" class="maps" style="width:800px;display: inline-block;text-align: center;"></div>
+
+<br><br>
+<h3>被引用最多的歌曲TOP10</h3>
+<p>1. 被引用最多的歌曲大部分均为3年前发布的音乐</p>
+<p>2. 被引用最多的歌曲大部分为网络歌曲</p>
+<div id="song_ref_table" class="maps" style="width:800px;display: inline-block;text-align: center;"></div>
+<div id="song_ref" class="maps" style="width:800px; height:600px;display: inline-block;text-align: center;"></div>
+
+<br><br>
+<h3>评论最多的歌曲TOP10</h3>
+<div id="hot_song_table" class="maps" style="width:800px;display: inline-block;text-align: center;"></div>
+<div id="hot_song" class="maps" style="width:800px; height:600px;display: inline-block;text-align: center;"></div>
+
+
+
+<br><br>
+<h3>被翻唱最多的歌曲TOP10</h3>
+<p>翻唱歌曲TOP10</p>
+
+<div id="fan_song_table" class="maps" style="width:800px;display: inline-block;text-align: center;"></div>
+<p>翻唱歌曲标签词云</p>
+<div id="fan_song_wordcloud" class="maps" style="width:800px; height:600px;display: inline-block;text-align: center;"></div>
+
+{%endblock desc%}
+
+
+{%block script%}
+<script>
+    fetch_html('song_data');
+
+    fetch_html('song_ref_table');
+    fetch_data('song_ref');
+
+    fetch_html('hot_song_table');
+    fetch_data('hot_song');
+
+    fetch_html('fan_song_table');
+    fetch_data('fan_song_wordcloud');
+</script>
+{%endblock script%}

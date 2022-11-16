@@ -1,0 +1,71 @@
+{%extends 'base.html'%}
+
+{%block desc%}
+<h1>评论情感分析</h1>
+<p>针对热门标签的歌曲评论进行情感分析</p>
+<div id="current-maps">
+    <div>
+        <label>请选择标签: </label>
+        <select name="ind" id="tag_selector">
+            <option value="华语" selected>华语</option>
+            <option value="流行">流行</option>
+            <option value="夜晚">夜晚</option>
+            <option value="轻音乐">轻音乐</option>
+            <option value="治愈">治愈</option>
+            <option value="学习">学习</option>
+            <option value="欧美">欧美</option>
+            <option value="伤感">伤感</option>
+            <option value="浪漫">浪漫</option>
+            <option value="说唱">说唱</option>
+        </select>
+    </div>
+</div>
+<br>
+<h2 style="text-align: center;display: block;" id="family_notice">更新中...</h2>
+<div id="family" class="maps" style="width:800px;height: 600px;;display: inline-block;text-align: center;"></div>
+<h2 style="text-align: center;display: block;" id="emotion_notice">更新中...</h2>
+<div id="emotion" class="maps" style="width:800px;height: 600px;;display: inline-block;text-align: center;"></div>
+<h2 style="text-align: center;display: block;" id="gq_notice">更新中...</h2>
+<div id="gq" class="maps" style="width:800px;height: 600px;;display: inline-block;text-align: center;"></div>
+
+{%endblock desc%}
+
+
+{%block script%}
+<script>
+    function fetch_data2(type) {
+        tag=$('#tag_selector').val();
+        url='/api?type='+type+'&tag='+tag;
+        var echart = echarts.init(document.getElementById(type), 'white', {renderer: 'canvas'});
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function (result) {
+                echart.setOption(result);
+                $('#'+type).css('display','inline-block');
+                $('#'+type+'_notice').css('display','none');
+
+            }
+        });
+    }
+    function update_data(){
+        fetch_data2('family');
+        fetch_data2('emotion');
+        fetch_data2('gq');
+    }
+    $(document).ready(function(){
+        update_data();
+        $('#tag_selector').change(function(){
+            $('#family_notice').css('display','block'); 
+            $('#emotion_notice').css('display','block'); 
+            $('#gq_notice').css('display','block'); 
+            $('#family').css('display','none');
+            $('#emotion').css('display','none');
+            $('#gq').css('display','none');
+            update_data();
+        });
+    });
+</script>
+{%endblock script%}

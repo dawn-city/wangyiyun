@@ -1,0 +1,50 @@
+{%extends 'base.html'%}
+
+{%block desc%}
+<h1>歌单数据</h1>
+<h3>数据概览</h3>
+<p>本系统爬取网易云音乐热门歌单1286个，根据热门歌单爬取了93904首歌曲，并取了每首歌曲的热门评论共844869条</p>
+<div id="summary" class="maps" style="width:1000px;display: inline-block;text-align: center;"></div>
+<hr>
+<h3>歌单歌曲数量范围</h3>
+<p>歌曲数量大部分都在20-200首之间，其中：20-50首歌曲的歌单占19%，50-100首歌曲的歌单占20%，100-200首歌曲的歌单占21%</p>
+<div id="playlist_songs_range" class="maps" style="width:1000px;height: 600px;display: inline-block;text-align: center;"></div>
+<hr>
+<h3>不同语种歌单播放量</h3>
+<p>选取的1286个热门歌单，华语音乐播放量占了89%，其次是欧美音乐，占比8.5%，其他语种音乐播放量仅占2.21%</p>
+<div id="lan_play_count" class="maps" style="width:1000px;height: 600px;display: inline-block;text-align: center;"></div>
+<hr>
+<h3>播放次数最多的歌单TOP10</h3>
+<p>根据数据来看，热门歌单的标签主要集中于: <B>华语(33%)、流行(27%)</B>；</p>
+<p>其次是：<B>榜单和网络歌曲</B>，分别占比10%</p>
+<div id="top10List" class="maps" style="width:1000px;display: inline-block;text-align: center;"></div>
+<div id="top10List_pie" class="maps" style="width:1000px;height:600px;display: inline-block;text-align: center;"></div>
+
+<hr>
+<h1>所有标签分析</h1>
+<p>从歌单标签来分析：</p>
+<p>1. 绝大部分网易云音乐用户都更偏向于华语流行音乐</p>
+<p>2. 排名前十的音乐标签中，仅有欧美音乐排在第7位，而其他语种音乐均排在10名以外</p>
+<div id="tag" class="maps" style="width:1000px; height:600px;display: inline-block;text-align: center;"></div>
+
+<hr>
+<div id="alltag_cloudword" class="maps" style="width:1000px; height:600px;display: inline-block;text-align: center;"></div>
+
+
+{%endblock desc%}
+
+
+{%block script%}
+<script>
+    fetch_html('summary');
+    fetch_data('playlist_songs_range');
+    fetch_data('lan_play_count');
+
+    fetch_html('summary');
+    fetch_html('top10List');
+    fetch_data('top10List_pie');
+
+    fetch_data('tag');
+    fetch_data('alltag_cloudword');
+</script>
+{%endblock script%}

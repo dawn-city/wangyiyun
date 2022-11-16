@@ -1,0 +1,22 @@
+{%extends 'base.html'%}
+
+{%block desc%}
+<h1>歌手分析</h1>
+<p>本系统爬取网易云音乐热门歌单1286个，根据热门歌单爬取了93904首歌曲，并取了每首歌曲的热门评论共844869条</p>
+<br>
+<p>歌曲最多的歌手中：</p>
+<p>1. 中国歌手有2名、日本歌手5名，欧美歌手3名</p>
+<p>1. 大部分均为原唱歌手</p>
+<div id="artist_most_table" class="maps" style="width:800px;display: inline-block;text-align: center;"></div>
+<div id="artist_most" class="maps" style="width:800px; height:600px;display: inline-block;text-align: center;"></div>
+
+{%endblock desc%}
+
+
+{%block script%}
+<script>
+    fetch_html('artist_most_table');
+    fetch_data('artist_most');
+
+</script>
+{%endblock script%}
